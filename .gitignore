@@ -1,0 +1,10 @@
+.env
+.env.local
+*.env
+Key.json
+env-backup.txt
+node_modules/
+dist/
+ysp_db.json
+.DS_Store
+*.log
