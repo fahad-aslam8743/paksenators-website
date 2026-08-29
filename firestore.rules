@@ -1,0 +1,55 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // The `admin` custom claim is set server-side by the Firebase Admin SDK
+    // (see server.ts: /api/admin/bootstrap and /api/admin/invite) after a
+    // request has already been authenticated and authorized — it can never
+    // be set by a client directly, which is what makes this trustworthy.
+    function isAdmin() {
+      return request.auth != null && request.auth.token.admin == true;
+    }
+
+    // Publicly readable flag so the client can decide whether to show the
+    // one-time "Create Super Admin" setup screen or the normal sign-in form.
+    match /system/adminMeta {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Directory of admin accounts (name/email/role). Only admins may read
+    // or write this — actual account creation/claim assignment always goes
+    // through the trusted server endpoints, never a direct client write.
+    match /admins/{uid} {
+      allow read, write: if isAdmin();
+    }
+
+    // Public form submissions: anyone may create, only admins may read/manage.
+    match /applications/{document} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    match /contactMessages/{document} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    match /subscribers/{document} {
+      allow read: if isAdmin();
+      allow create: if true;
+      allow update, delete: if isAdmin();
+    }
+
+    // Everything else: public site content, publicly readable, admin-managed.
+    // Covers leadership, senators, committees, chapters, sessions, events,
+    // news, publications, gallery, videos, certificates, resolutions,
+    // questions, policyRecommendations, settings, pages, menu, media, etc.
+    match /{collection}/{document} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+  }
+}

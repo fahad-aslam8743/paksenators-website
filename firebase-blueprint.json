@@ -1,0 +1,63 @@
+{
+  "entities": {
+    "videos": {
+      "title": "Video Gallery",
+      "description": "Original master video recordings of Youth Senate sessions, events, seminars, and speeches stored permanently in Firebase Storage and Firestore",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "category": { "type": "string" },
+        "videoUrl": { "type": "string" },
+        "storagePath": { "type": "string" },
+        "thumbnailUrl": { "type": "string" },
+        "thumbnailStoragePath": { "type": "string" },
+        "uploadedBy": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "status": { "type": "string" },
+        "sortOrder": { "type": "number" }
+      }
+    },
+    "leadership": {
+      "title": "Leadership Profiles",
+      "description": "Leadership and executive member profiles including Founder Chairman, President, Vice President, Secretaries, Committee Chairs, and District Leadership",
+      "fields": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "designation": { "type": "string" },
+        "category": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "photoStoragePath": { "type": "string" },
+        "province": { "type": "string" },
+        "district": { "type": "string" },
+        "biography": { "type": "string" },
+        "message": { "type": "string" },
+        "order": { "type": "number" },
+        "isActive": { "type": "boolean" },
+        "isDemo": { "type": "boolean" },
+        "updatedAt": { "type": "string" }
+      }
+    },
+    "gallery": {
+      "title": "Gallery Images",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "photoStoragePath": { "type": "string" },
+        "category": { "type": "string" }
+      }
+    },
+    "news": {
+      "title": "News Articles",
+      "fields": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "photoUrl": { "type": "string" },
+        "photoStoragePath": { "type": "string" },
+        "content": { "type": "string" }
+      }
+    }
+  }
+}

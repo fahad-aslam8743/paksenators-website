@@ -1,0 +1,82 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------
+   Admin CMS — shared glassmorphic component classes.
+   Applied across every admin panel tab (Homepage, Leadership, Events,
+   Senators, Media, Users, etc.) so the whole panel shares one modern,
+   frosted-glass, responsive design language instead of flat white boxes.
+   --------------------------------------------------------------------- */
+@layer components {
+  .admin-glass-card {
+    @apply relative backdrop-blur-xl bg-white/70 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl border border-white/60 shadow-lg shadow-slate-900/5;
+  }
+
+  .admin-input {
+    @apply w-full px-3.5 sm:px-4 py-2.5 sm:py-3 bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-xl text-sm text-slate-900 font-medium placeholder-slate-400 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:bg-white/90;
+  }
+
+  .admin-btn-primary {
+    @apply px-4 sm:px-5 py-2.5 bg-gradient-to-r from-emerald-700 to-emerald-900 hover:from-emerald-600 hover:to-emerald-800 text-white font-bold text-xs rounded-xl shadow-md shadow-emerald-900/10 flex items-center justify-center gap-2 transition disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .admin-table-wrap {
+    @apply w-full overflow-x-auto rounded-2xl border border-white/60 backdrop-blur-xl bg-white/70 shadow-lg shadow-slate-900/5;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Registration form print layout.
+   RegistrationFormModal portals a dedicated #regFormPrintPortal straight
+   onto <body> and tags <body> with .printing-reg-form while it's mounted.
+   The portal holds three fixed A4 pages (form / CNIC front+back / other
+   documents); while it's active we hide the entire app (#root — header,
+   footer, navbar, the on-screen modal, everything) so the printout
+   contains only those three pages, never the live site chrome behind
+   the modal.
+   --------------------------------------------------------------------- */
+@media print {
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+
+  body.printing-reg-form #root {
+    display: none !important;
+  }
+
+  #regFormPrintPortal {
+    display: block !important;
+  }
+
+  .reg-print-page {
+    page-break-after: always;
+    break-after: page;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .reg-print-page:last-child {
+    page-break-after: auto;
+    break-after: auto;
+  }
+
+  .reg-print-avoid-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  #regFormPrintPortal * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

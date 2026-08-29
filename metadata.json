@@ -1,0 +1,6 @@
+{
+  "name": "Youth Senate of Pakistan",
+  "description": "Official national youth parliamentary platform, senator directory, standing committees, parliamentary sessions, events, membership application portal, admin CMS, and certificate verification system.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

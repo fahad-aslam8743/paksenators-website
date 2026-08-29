@@ -1,0 +1,14 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Public read access for all site media (photos, videos, documents).
+    // Uploads and deletes require a signed-in user whose Firebase Auth
+    // token carries the `admin` custom claim (set only by the trusted
+    // server-side Admin SDK — see server.ts).
+    match /{allPaths=**} {
+      allow read: if true;
+      allow write: if request.auth != null && request.auth.token.admin == true;
+    }
+  }
+}
